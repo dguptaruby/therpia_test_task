@@ -1,0 +1,9 @@
+<h1>Editing User</h1>
+<%= form_with(model: @user, url: user_profile_path, method: 'patch') do |f|%>
+<section>
+<%= render 'form', user: @user, f: f  %>
+
+<%= link_to 'Show', user_profile_path(@user) %> |
+<%= link_to 'Back', user_profiles_path %>
+<% end%>
+</section>

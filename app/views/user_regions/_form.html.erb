@@ -1,0 +1,29 @@
+<%= form_with(model: user_region) do |form| %>
+<section>
+  <% if user_region.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(user_region.errors.count, "error") %> prohibited this user_region from being saved:</h2>
+
+      <ul>
+        <% user_region.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="custom-select">
+    <%#= form.label :user %>
+    <%= form.collection_select :user_id, User.order(:id), :id, :email  %>
+  </div>
+
+  <div class="custom-select">
+    <%#= form.label :regions %>
+    <%= form.collection_select :region_id, Region.order(:id), :id, :region_name, multiple: true  %>
+  </div>
+
+  <div class="send-container">
+    <%= form.submit %>
+  </div>
+<% end %>
+</section>
+<%= render 'partials/js_partial' %>

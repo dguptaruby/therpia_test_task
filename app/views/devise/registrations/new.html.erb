@@ -1,0 +1,76 @@
+  <h2>Sign up</h2>
+
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+<section >
+  <%= render "devise/shared/error_messages", resource: resource %>
+  <div class="input-container">
+    <%= f.label :first_name %><br />
+    <%= f.text_field :first_name, autofocus: true %>
+  </div>
+  <div class="input-container">
+    <%= f.label :last_name %><br />
+    <%= f.text_field :last_name, autofocus: true %>
+  </div>
+  <div class="input-container">
+    <%= f.label :startDate %><br />
+    <%= f.date_field :start_date, autofocus: true %>
+  </div>
+
+  <div class="input-container">
+    <%= f.label :endDate %><br />
+    <%= f.date_field :end_date, autofocus: true %>
+  </div>
+  
+  <div class="input-container">
+    <%= f.label :monthly_charge %><br />
+    <%= f.number_field :monthly_charge, autofocus: true %>
+  </div>
+  <div class="input-container">
+    <%= f.label :email %><br />
+    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+  </div>
+  <div class="custom-select">
+     <%#= f.label :company %>
+     <%= f.collection_select :company_id, Company.order(:id), :id, :name %>
+  </div>
+
+   <div  >
+    <%#= f.label :Role %><br />
+    <%= f.select :user_role, User::USER_ROLES.keys.to_a %>
+  </div>
+  <div>
+    <%= f.label :active %>
+    <%= f.check_box :is_active %>
+  </div>
+  <%= f.fields_for :image, Image.new do |field|%>
+  <div class="input-container">
+    <%= field.label :photo %>
+    <%= field.file_field :photo %>
+  </div>
+  <% end %>
+  <div class="input-container">
+    <%= f.label :notes %>
+    <%= f.rich_text_area :notes %>
+  </div>
+ <div class="input-container">
+    <%= f.label :password %>
+    <% if @minimum_password_length %>
+    <em>(<%= @minimum_password_length %> characters minimum)</em>
+    <% end %><br />
+    <%= f.password_field :password, autocomplete: "new-password" %>
+  </div>
+
+  <div class="input-container">
+    <%= f.label :password_confirmation %><br />
+    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+  </div>
+
+  <div class="send-container">
+    <%= f.submit "Sign up" %>
+  </div>
+<% end %>
+
+<%= render "devise/shared/links" %>
+<%= render 'partials/js_partial' %>
+
+</section>

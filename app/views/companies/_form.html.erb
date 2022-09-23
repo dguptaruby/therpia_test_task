@@ -1,0 +1,102 @@
+<%= form_with(model: company) do |form| %>
+  <section class="left full">
+  <% if company.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(company.errors.count, "error") %> prohibited this company from being saved:</h2>
+
+      <ul>
+        <% company.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="input-container">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div class="input-container">
+    <%= form.label :post_code %>
+    <%= form.text_field :post_code %>
+  </div>
+
+  <div class="input-container">
+    <%= form.label :startdate %>
+    <%= form.datetime_select :startdate %>
+  </div>
+
+  <div>
+    <%= form.label :active %>
+    <%= form.check_box :active %>
+  </div>
+
+  <label class="custom-select">
+    City
+    <%= form.collection_select :city_id, City.order(:id), :id, :city_name%>
+  </label>
+
+<label class="custom-select">
+    state
+    <%= form.collection_select :state_id, State.order(:id), :id, :state_name %>
+  </label>
+
+  <label class="custom-select">
+    Country
+    <%= form.collection_select :country_id, Country.order(:id), :id, :country_name %>
+  </label>
+
+
+
+
+  <div class="send-container">
+    <%= form.submit %>
+  </div>
+</section>
+<% end %>
+<script type="text/javascript">
+    /* Video Explanatio - https://youtu.be/-0VuZEYIYuI */
+document.querySelectorAll('.custom-select').forEach(setupSelector);
+
+function setupSelector(selector) {
+  selector.addEventListener('change', e => {
+    console.log('changed', e.target.value)
+  })
+
+  selector.addEventListener('mousedown', e => {
+    if(window.innerWidth >= 420) {// override look for non mobile
+      e.preventDefault();
+
+      const select = selector.children[0];
+      const dropDown = document.createElement('ul');
+      dropDown.className = "selector-options";
+
+      [...select.children].forEach(option => {
+        const dropDownOption = document.createElement('li');
+        dropDownOption.textContent = option.textContent;
+
+        dropDownOption.addEventListener('mousedown', (e) => {
+          e.stopPropagation();
+          select.value = option.value;
+          selector.value = option.value;
+          select.dispatchEvent(new Event('change'));
+          selector.dispatchEvent(new Event('change'));
+          dropDown.remove();
+        });
+
+        dropDown.appendChild(dropDownOption);   
+      });
+
+      selector.appendChild(dropDown);
+
+      // handle click out
+      document.addEventListener('click', (e) => {
+        if(!selector.contains(e.target)) {
+          dropDown.remove();
+        }
+      });
+    }
+  });
+}
+</script>

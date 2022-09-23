@@ -1,0 +1,40 @@
+<%= form_with(model: place) do |form| %>
+<section>
+  <% if place.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(place.errors.count, "error") %> prohibited this place from being saved:</h2>
+
+      <ul>
+        <% place.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="input-container"> 
+    <%= form.label :place_name %>
+    <%= form.text_field :place_name, place_holder: 'Place' %>
+  </div>
+
+  <div class="custom-select">
+    <%= form.collection_select :company_id, Company.order(:id), :id, :name , place_holder: 'Company' %>
+    <%= form.label :company %>
+  </div>
+
+
+  <%= form.fields_for :node, @node do |form| %>
+  <div class="input-container">
+    <%= form.label :place_name %>
+    <%= form.text_field :node_name %> 
+  </div>  
+  <%end %>
+
+  <div class="send-container">
+    <%= form.submit %>
+  </div>
+<% end %>
+</section>
+<%= render 'partials/js_partial' %>
+
+

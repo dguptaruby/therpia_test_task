@@ -1,0 +1,13 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Region name:</strong>
+  <%= @user_region.region&.region_name %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @user_region.user&.email %>
+</p>
+<%= link_to 'Edit', edit_user_region_path(@user_region) %> |
+<%= link_to 'Back', user_regions_path %>

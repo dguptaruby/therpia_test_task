@@ -1,0 +1,26 @@
+<%= form_with(model: country) do |form| %>
+<section>
+  <% if country.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(country.errors.count, "error") %> prohibited this country from being saved:</h2>
+
+      <ul>
+        <% country.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="input-container">
+    <%= form.label :country_name %>
+    <%= form.text_field :country_name %>
+  </div>
+
+  <div class="send-container">
+    <%= form.submit %>
+  </div>
+<% end %>
+</section>
+
+<%= render 'partials/js_partial' %>

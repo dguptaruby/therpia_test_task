@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>TherapiaTestTask</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    
+  </head>
+  <nav>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul  class="horizontal" id="nav"
+    >
+        <% if user_signed_in? %>
+            <li class="nav-item">
+                <li><%= link_to "Home", root_path%></li>
+                <li><%= link_to "Companies", companies_path%></li>
+                <li><%= link_to "User Regions", user_regions_path%></li>
+                <li><%= link_to "Places/Nodes", places_path%></li>
+                <li><%= link_to "User list", user_profiles_path%></li>
+                <% if current_user.is_admin? || current_user.is_manager? %>
+                <li><%= link_to "Regions", regions_path%></li>
+                <% end %>
+                <% if current_user.is_admin? %>
+                <li><%= link_to "Cities", cities_path%></li>
+                <li><%= link_to "States", states_path%></li>
+                <li><%= link_to "Countries", countries_path%></li>
+                <% end%>
+                <li><%= link_to 'Sign Out', destroy_user_session_path, method: :delete, class: 'nav-link' %></li>
+            </li>
+        <% else %>
+            <li class="nav-item">
+                <%= link_to 'Sign In', new_user_session_path, class: 'nav-link' %>
+            </li>
+            <li class="nav-item">
+                <%= link_to 'Register', new_user_registration_path, class: 'nav-link' %>
+            </li>
+
+  
+
+        <% end %>
+    </ul>
+  </div>
+</nav>
+  <body>
+    <%= yield %>
+  </body>
+</html>
