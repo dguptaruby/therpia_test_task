@@ -13,7 +13,7 @@ class User < ApplicationRecord
   has_rich_text :notes
 
   has_many :user_regions, dependent: :destroy
-  has_one :image
+  has_one :image, dependent: :destroy
   validates :start_date, :end_date, presence: true
   validate :end_date_is_after_start_date
   accepts_nested_attributes_for :image

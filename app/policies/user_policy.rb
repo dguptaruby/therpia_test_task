@@ -16,7 +16,7 @@ class UserPolicy < ApplicationPolicy
   end
 
   def update?
-    user.is_admin? || user.is_manager? || user.is_normal?
+    user.is_admin? || user.is_manager? || user.is_normal_user?
   end
 
   def destroy?

@@ -46,8 +46,10 @@
 </p>
 
 <% if @user.image.present?%>
-<%= image_tag (@user.image.photo) %>
+<div class="img-container">
+<%= image_tag (@user.image.photo)%>
 <% end%>
+</div>
 
 <%= link_to 'Edit', edit_user_profile_path(@user) %> 
 <%= link_to 'Back', user_profiles_path %>

@@ -63,9 +63,9 @@ ActiveRecord::Schema.define(version: 2022_09_23_062230) do
     t.boolean "active"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "country_id", null: false
-    t.bigint "state_id", null: false
-    t.bigint "city_id", null: false
+    t.bigint "country_id"
+    t.bigint "state_id"
+    t.bigint "city_id"
     t.index ["city_id"], name: "index_companies_on_city_id"
     t.index ["country_id"], name: "index_companies_on_country_id"
     t.index ["state_id"], name: "index_companies_on_state_id"

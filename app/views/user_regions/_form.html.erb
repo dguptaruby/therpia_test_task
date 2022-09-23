@@ -11,13 +11,13 @@
       </ul>
     </div>
   <% end %>
+    <%= form.label :user %>
   <div class="custom-select">
-    <%#= form.label :user %>
     <%= form.collection_select :user_id, User.order(:id), :id, :email  %>
   </div>
 
+    <%= form.label :regions %>
   <div class="custom-select">
-    <%#= form.label :regions %>
     <%= form.collection_select :region_id, Region.order(:id), :id, :region_name, multiple: true  %>
   </div>
 
